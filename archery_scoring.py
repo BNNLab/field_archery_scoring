@@ -155,12 +155,21 @@ def render_mailto_button(name: str, email_to: str, scores: list[int]):
     if not email_to or "@" not in email_to:
         st.button("📧 Open email app with results", disabled=True)
         return
+
     subject, body = _compose_subject_body(name, scores)
     mailto = f"mailto:{email_to}?subject={_url.quote(subject)}&body={_url.quote(body)}"
+
     st.markdown(
         f"""
-        {mailto}
-            <button style="width:100%;padding:0.6rem 1rem;border-radius:8px;border:1px solid #bbb;background:#f7f7f7;cursor:pointer;">
+        <a href="{mailto}" target="_blank">
+            <button style="
+                width:100%;
+                padding:0.6rem 1rem;
+                border-radius:8px;
+                border:1px solid #bbb;
+                background:#f7f7f7;
+                cursor:pointer;
+            ">
                 📧 Open email app with results
             </button>
         </a>
